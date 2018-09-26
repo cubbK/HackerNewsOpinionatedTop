@@ -3,18 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using HackerNewsOpinionatedTopApi.Models;
 
-namespace HackerNewsOpinionatedTop.Controllers
+namespace HackerNewsOpinionatedTopApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class ArticlesController : ControllerBase
     {
+        private readonly HnContext _context;
+
+        public ArticlesController(HnContext context)
+        {
+            _context = context;
+        }
+
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<Article>> GetAll()
         {
-            return new string[] { "value1", "value2" };
+            return _context.Articles.ToList();
         }
 
         // GET api/values/5
