@@ -27,27 +27,23 @@ namespace HackerNewsOpinionatedTopApi.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<Article> GetById(int id)
         {
-            return "value";
+            var article = _context.Articles.Find(id);
+            if (article == null)
+            {
+                return NotFound();
+            }
+            return article;
         }
 
-        // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Create(Article article)
         {
-        }
+            _context.Articles.Add(article);
+            _context.SaveChanges();
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return CreatedAtRoute("GetTodo", new { id = article.Id }, article);
         }
     }
 }
