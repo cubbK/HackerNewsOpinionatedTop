@@ -7,7 +7,7 @@ namespace HackerNewsOpinionatedTopApi.Models
 {
     public class Article
     {
-        public long Id { get; set; }
-        public string Name { get; set; }
+        public int Id { get; set; }
+        public string Title { get; set; }
     }
 }

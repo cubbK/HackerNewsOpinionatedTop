@@ -26,7 +26,7 @@ namespace HackerNewsOpinionatedTopApi.Controllers
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetArticle")]
         public ActionResult<Article> GetById(int id)
         {
             var article = _context.Articles.Find(id);
@@ -37,13 +37,16 @@ namespace HackerNewsOpinionatedTopApi.Controllers
             return article;
         }
 
+        // Create article at api/values
         [HttpPost]
         public IActionResult Create(Article article)
         {
             _context.Articles.Add(article);
             _context.SaveChanges();
 
-            return CreatedAtRoute("GetTodo", new { id = article.Id }, article);
+            //return 123;
+            return CreatedAtRoute("GetArticle", new { id = article.Id }, article);
         }
+        
     }
 }
