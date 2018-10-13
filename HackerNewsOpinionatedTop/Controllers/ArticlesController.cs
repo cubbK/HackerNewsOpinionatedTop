@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using HackerNewsOpinionatedTopApi.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HackerNewsOpinionatedTopApi.Controllers
 {
@@ -16,6 +17,11 @@ namespace HackerNewsOpinionatedTopApi.Controllers
         public ArticlesController(HnContext context)
         {
             _context = context;
+
+            User admin = new User { Username = "admin", Password = "qwertydsa" };
+
+            _context.Users.Add(admin);
+            _context.SaveChanges();
         }
 
         // GET api/values
@@ -38,7 +44,7 @@ namespace HackerNewsOpinionatedTopApi.Controllers
         }
 
         // Create article at api/values
-        [HttpPost]
+        [HttpPost, Authorize]
         public IActionResult Create(Article article)
         {
             _context.Articles.Add(article);
