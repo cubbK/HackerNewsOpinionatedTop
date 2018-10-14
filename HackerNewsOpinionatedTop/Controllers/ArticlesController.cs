@@ -50,6 +50,20 @@ namespace HackerNewsOpinionatedTopApi.Controllers
             //return 123;
             return CreatedAtRoute("GetArticle", new { id = article.Id }, article);
         }
-        
+
+        [HttpDelete("{id}"), Authorize]
+        public IActionResult Delete(int id)
+        {
+            var article = _context.Articles.Find(id);
+            if (article == null)
+            {
+                return NotFound();
+            }
+
+            _context.Articles.Remove(article);
+            _context.SaveChanges();
+            return NoContent();
+        }
+
     }
 }
