@@ -17,7 +17,7 @@ namespace HackerNewsOpinionatedTopApi.Controllers
         private IConfiguration _config;
         private readonly HnContext _context;
 
-        public TokenController(IConfiguration config, HnContext context)
+        public TokenController(IConfiguration config, HnContext context, IConfiguration configuration)
         {
             _config = config;
             _context = context;
@@ -25,7 +25,7 @@ namespace HackerNewsOpinionatedTopApi.Controllers
             int usersCount = context.Users.Count();
             if (usersCount == 0)
             {
-                User admin = new User { Username = "admin", Password = "123" };
+                User admin = new User { Username = configuration["Admin:Username"], Password = configuration["Admin:Password"] };
                 context.Users.Add(admin);
                 context.SaveChanges();
             }
