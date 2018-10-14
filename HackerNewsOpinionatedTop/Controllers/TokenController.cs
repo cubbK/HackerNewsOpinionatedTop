@@ -43,7 +43,7 @@ namespace HackerNewsOpinionatedTopApi.Controllers
 
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
               _config["Jwt:Issuer"],
-              expires: DateTime.Now.AddMinutes(30),
+              expires: DateTime.Now.AddDays(30),
               signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
@@ -55,7 +55,7 @@ namespace HackerNewsOpinionatedTopApi.Controllers
 
             if (login.Username == "mario" && login.Password == "secret")
             {
-                user = new User { Username = "Mario Rossi", Email = "mario.rossi@domain.com" };
+                user = new User { Username = "Mario Rossi", Password = login.Password  };
             }
             return user;
         }

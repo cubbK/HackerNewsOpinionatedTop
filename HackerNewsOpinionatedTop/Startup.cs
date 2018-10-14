@@ -46,7 +46,7 @@ namespace HackerNewsOpinionatedTopApi
                 });
 
             services.AddDbContext<HnContext>(opt =>
-                opt.UseInMemoryDatabase("TodoList"));
+                opt.UseSqlite("Data Source=Database.db"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
