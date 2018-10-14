@@ -21,6 +21,15 @@ namespace HackerNewsOpinionatedTopApi.Controllers
         {
             _config = config;
             _context = context;
+
+            int usersCount = context.Users.Count();
+            if (usersCount == 0)
+            {
+                User admin = new User { Username = "admin", Password = "123" };
+                context.Users.Add(admin);
+                context.SaveChanges();
+            }
+
         }
 
         [AllowAnonymous]

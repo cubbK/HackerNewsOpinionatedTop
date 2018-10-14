@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-
 namespace HackerNewsOpinionatedTopApi.Models
 {
     public class HnContext: DbContext
