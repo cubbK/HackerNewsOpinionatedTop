@@ -12,7 +12,7 @@ using System.Linq;
 namespace HackerNewsOpinionatedTopApi.Controllers
 {
     [Route("api/[controller]")]
-    public class TokenController : Controller
+    public class TokenController : ControllerBase
     {
         private IConfiguration _config;
         private readonly HnContext _context;
@@ -56,13 +56,13 @@ namespace HackerNewsOpinionatedTopApi.Controllers
         {
             var userToCheck = _context.Users.FirstOrDefault(user => user.Username == login.Username);
             if (userToCheck == null) return null;
-           
+
             if(userToCheck.Password == login.Password)
             {
-                return userToCheck;
+              return userToCheck;
             } else
             {
-                return null;
+            return null;
             }
         }
     }
