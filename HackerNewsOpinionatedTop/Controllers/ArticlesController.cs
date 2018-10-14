@@ -18,10 +18,7 @@ namespace HackerNewsOpinionatedTopApi.Controllers
         {
             _context = context;
 
-            User admin = new User { Username = "admin", Password = "qwertydsa" };
-
-            _context.Users.Add(admin);
-            _context.SaveChanges();
+            
         }
 
         // GET api/values

@@ -7,6 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using HackerNewsOpinionatedTopApi.Models;
+using System.Linq;
 
 namespace HackerNewsOpinionatedTopApi.Controllers
 {
@@ -14,10 +15,12 @@ namespace HackerNewsOpinionatedTopApi.Controllers
     public class TokenController : Controller
     {
         private IConfiguration _config;
+        private readonly HnContext _context;
 
-        public TokenController(IConfiguration config)
+        public TokenController(IConfiguration config, HnContext context)
         {
             _config = config;
+            _context = context;
         }
 
         [AllowAnonymous]
@@ -51,15 +54,16 @@ namespace HackerNewsOpinionatedTopApi.Controllers
 
         private User Authenticate(Login login)
         {
-            User user = null;
-
-            if (login.Username == "mario" && login.Password == "secret")
+            var userToCheck = _context.Users.FirstOrDefault(user => user.Username == login.Username);
+            if (userToCheck == null) return null;
+           
+            if(userToCheck.Password == login.Password)
             {
-                user = new User { Username = "Mario Rossi", Password = login.Password  };
+                return userToCheck;
+            } else
+            {
+                return null;
             }
-            return user;
         }
-
-   
     }
 }
