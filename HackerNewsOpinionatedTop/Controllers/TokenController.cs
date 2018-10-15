@@ -4,10 +4,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using System.Text;
 using HackerNewsOpinionatedTopApi.Models;
 using System.Linq;
+
 
 namespace HackerNewsOpinionatedTopApi.Controllers
 {
@@ -25,12 +25,15 @@ namespace HackerNewsOpinionatedTopApi.Controllers
             int usersCount = context.Users.Count();
             if (usersCount == 0)
             {
-                User admin = new User { Username = configuration["Admin:Username"], Password = configuration["Admin:Password"] };
+                var hashedPassword = SecurePasswordHasher.Hash(configuration["Admin:Password"]);
+                User admin = new User { Username = configuration["Admin:Username"], Password = hashedPassword };
                 context.Users.Add(admin);
                 context.SaveChanges();
             }
 
         }
+
+        
 
         [AllowAnonymous]
         [HttpPost]
@@ -66,7 +69,9 @@ namespace HackerNewsOpinionatedTopApi.Controllers
             var userToCheck = _context.Users.FirstOrDefault(user => user.Username == login.Username);
             if (userToCheck == null) return null;
 
-            if(userToCheck.Password == login.Password)
+            bool isPasswordValid = SecurePasswordHasher.Verify(login.Password, userToCheck.Password);
+
+            if(isPasswordValid)
             {
               return userToCheck;
             } else

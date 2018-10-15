@@ -1,4 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using System.Security.Cryptography;
+using System.Security.Claims;
+using System;
 
 namespace HackerNewsOpinionatedTopApi.Models
 {
@@ -12,5 +16,6 @@ namespace HackerNewsOpinionatedTopApi.Models
 
         public DbSet<Article> Articles { get; set; }
         public DbSet<User> Users { get; set; }
+
     }
 }
