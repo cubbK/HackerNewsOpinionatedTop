@@ -1,11 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { PostComponent } from './post/post.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MaterialModule} from './material.module';
+
 import { RouterModule, Routes } from '@angular/router';
+
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTabsModule} from '@angular/material/tabs';
 
 const appRoutes: Routes = [
   // { path: 'admin', component: AdminAddComponent },
@@ -19,8 +23,10 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    MatCardModule,
     BrowserAnimationsModule,
-    MaterialModule,
+    MatButtonModule,
+    MatTabsModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
