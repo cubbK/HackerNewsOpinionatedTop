@@ -1,3 +1,31 @@
 body {
   background: red;
 }
+
+.container {
+  display: grid;
+  grid-template-columns: 3% 8fr 3%;
+  grid-template-areas:
+    "header header header"
+    ". content ."
+    "footer footer footer";
+}
+
+.header {
+  grid-area: header;
+}
+
+.posts {
+  display: flex;
+  flex-wrap: wrap;
+  grid-area: content;
+  justify-content: space-around;
+}
+
+.posts > * {
+  margin: 5px;
+}
+
+.footer {
+  grid-area: footer;
+}
