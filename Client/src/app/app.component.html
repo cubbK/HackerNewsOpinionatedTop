@@ -5,23 +5,12 @@
         <span>Opinionated HN</span>
       </mat-toolbar-row>
     </mat-toolbar>
-
   </header>
-
-
-  <div class="posts">
-    <app-post></app-post>
-    <app-post></app-post>
-    <app-post></app-post>
-    <app-post></app-post>
+  <div class="content">
+    <base href="/">
+    <router-outlet></router-outlet>
   </div>
-
   <footer class="footer">
-    asd
+    Footer
   </footer>
 </div>
-
-
-
-<base href="/">
-<router-outlet></router-outlet>

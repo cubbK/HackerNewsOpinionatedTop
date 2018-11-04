@@ -1,10 +1,8 @@
-body {
-  background: red;
-}
-
 .container {
   display: grid;
+  min-height: 100%;
   grid-template-columns: 3% 8fr 3%;
+  grid-template-rows: auto 1fr auto;
   grid-template-areas:
     "header header header"
     ". content ."
@@ -15,15 +13,8 @@ body {
   grid-area: header;
 }
 
-.posts {
-  display: flex;
-  flex-wrap: wrap;
+.content {
   grid-area: content;
-  justify-content: space-around;
-}
-
-.posts > * {
-  margin: 5px;
 }
 
 .footer {
