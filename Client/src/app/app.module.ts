@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { PostComponent } from './post/post.component';
@@ -13,6 +12,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from './material.module';
 
 import { PostService } from './services/post.service';
+
+import { GeneralInterceptor } from './interceptors/general.interceptor';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -34,12 +35,14 @@ const appRoutes: Routes = [
     MaterialModule,
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      // { enableTracing: true } // <-- debugging purposes only
     ),
-    HttpClientModule,
-    HttpModule
+    HttpClientModule
   ],
-  providers: [PostService],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: GeneralInterceptor, multi: true },
+    PostService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
