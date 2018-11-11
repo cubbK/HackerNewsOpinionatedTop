@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 /**
  * @title Card with multiple sections
@@ -8,4 +8,7 @@ import {Component} from '@angular/core';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css'],
 })
-export class PostComponent {}
+export class PostComponent {
+  @Input() title: string;
+  @Input() description: string;
+}

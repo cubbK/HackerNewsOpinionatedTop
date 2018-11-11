@@ -10,4 +10,8 @@ export class PostService {
   private cachePostsSize: number;
 
   constructor(private http: HttpClient) {}
+
+  public getAll () {
+    return this.http.get('/articles');
+  }
 }

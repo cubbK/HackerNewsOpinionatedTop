@@ -1,6 +1,7 @@
 <div class="posts">
-  <app-post></app-post>
-  <app-post></app-post>
-  <app-post></app-post>
-  <app-post></app-post>
+  <app-post
+    *ngFor="let article of (articles | async)"
+    title="{{ article.title }}"
+    description="{{ article.description }}"
+  ></app-post>
 </div>
